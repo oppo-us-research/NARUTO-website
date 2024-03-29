@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="NARUTO: Neural Active Reconstruction from Uncertain Target Observations">
+  <meta name="keywords" content="Active Reconstruction, Surface Reconstruction, Next-best-view prediction, MR/XR">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NARUTO: Neural Active Reconstruction from Uncertain Target Observations</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/before_after.css">
+  <!-- <link rel="icon" href="./static/images/cameraicon.svg"> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <link rel="stylesheet" href="./static/css/magnify.css">
+  <script src="./static/js/jquery-2.2.4.min.js"></script>
+  <script src="./static/js/jquery.magnify.js"></script>
+
+  <script src="twentytwenty/js/jquery-3.2.1.min.js" defer type="text/javascript"></script>
+  <script src="twentytwenty/js/jquery.event.move.js" defer type="text/javascript"></script>
+  <script src="twentytwenty/js/jquery.twentytwenty.js" defer type="text/javascript"></script>
+  <link rel="stylesheet" href="twentytwenty/css/twentytwenty.css" type="text/css" media="screen" />
+  <style>
+    .green-text {
+      color: green;
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://oppo-us-research.github.io/OPPO_US_Research_Center_XR_Team">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">
+                NARUTO 
+                <p style="font-size: 30px;">Neural Active Reconstruction from Uncertain Target Observations</p>
+            </h1>
+          <div class="is-size-5 publication-authors">
+            
+            <span class="author-block">
+              <a href="https://ziyue.cool/">Ziyue Feng</a><sup>*,1,2</sup>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span class="author-block">
+              <a href="https://huangying-zhan.github.io/">Huangying Zhan</a><sup>*&#8224,1</sup>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=X6MkScIAAAAJ&hl=en">Zheng Chen</a><sup>1,3</sup>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            </span>
+            <span class="author-block">
+              <a href="https://yanqingan.github.io/">Qingan Yan</a><sup>1</sup>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            </span>
+            <br>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?hl=en&user=Pt4q_QkAAAAJ">Xiangyu Xu</a><sup>1</sup>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            </span>
+            <span class="author-block">
+              <a href="https://www.changjiangcai.com/">Changjiang Cai</a><sup>1</sup>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            </span>
+            <span class="author-block">
+              <a href="https://www.clemson.edu/cecas/departments/automotive-engineering/people/li.html">Bing Li</a><sup>1,2</sup>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            </span>
+            <span class="author-block">
+              <a href="https://www.clemson.edu/cecas/departments/automotive-engineering/people/qzhu.html">Qilun Zhu</a><sup>1,2</sup>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            </span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/yi-xu-42654823">Yi Xu</a><sup>1</sup>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup> OPPO US Research Center &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span class="author-block"><sup>2</sup> Clemson University&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span class="author-block"><sup>3</sup> Indiana University&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <p>&nbsp;</p>
+            <sup>1&nbsp;</sup>
+            <a href="https://github.com/oppo-us-research/"><img style="width:15%; padding-right: 15px;" src="./static/images/oppo_logo.png"></a>
+            <sup>2</sup>
+            <a href="https://www.clemson.edu/index.html"><img style="width:18%; padding-right: 15px;" src="./static/images/ClemsonUniversityLogo.jpg"></a>
+            <sup>3</sup>
+            <a href="https://www.iu.edu/index.html"><img style="width:18%; padding-right: 15px;" src="./static/images/IndianaUniversityLogo.png"></a>
+
+            <!-- <p>&nbsp;</p> -->
+            <br>
+            <span class="author-block"><sup>*</sup><small> Equal Contributions</small></span>
+            <span class="author-block"><sup>&#8224</sup><small> Corresponding author</small></span>
+
+          </div>
+          <br>
+          <h4 class="title is-4">CVPR 2024</h4>
+          <!-- <p>&nbsp;</p> -->
+          <script>
+            $(document).ready(function() {
+              // var $zoom = $('.zoom').magnify(
+              // //   {
+              // //   magnifiedWidth: 1000,
+              // //   magnifiedHeight: 753
+              // // }
+              // );
+              // $zoom.destroy();
+            });
+          </script>
+<style>
+.magnify > .magnify-lens {
+  width: 130px;
+  height: 130px;
+}
+</style>
+
+<style>
+  /* Style the buttons */
+  .btn {
+    border: none;
+    outline: none;
+    padding: 10px 16px;
+    background-color: #f1f1f1;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 8px;
+  }
+  
+  /* Style the active class, and buttons on mouse-over */
+  .active, .btn:hover {
+    background-color: #666;
+    color: white;
+  }
+
+  /* .twentytwenty-container {
+    min-height: 200px;
+} */
+
+  </style>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2402.18771.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2402.18771"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- <span class="link-block">
+                <a href="https://youtu.be/YsPPmf-E6Lg"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <span class="link-block">
+                <a href="https://github.com/oppo-us-research/NARUTO"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (Coming Soon)</span>
+                  </a>
+              </span>
+              <!-- <span class="link-block">
+                <a href="https://huggingface.co/stack93/spacetimegaussians/tree/main"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-file"></i>
+                  </span>
+                  <span>Viewer and Models</span>
+                  </a>
+              </span> -->
+              <!-- <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <!-- <div class="item item-img_pearl">
+          <video poster="" id="img_pearl" autoplay controls muted loop playsinline height="100%">
+            <source src="./videos/02flamegif.mp4"
+                    type="video/mp4">
+          </video>
+        </div> -->
+        <!-- <div class="item item-img_pearl">
+          <video poster="" id="sdf_mechanism" autoplay controls muted loop playsinline height="100%">
+            <source src="./videos/birthdaygif.mp4" 
+                    type="video/mp4">
+          </video>
+        </div> -->
+        <div class="item item-img_pearl">
+          <video poster="" id="nerf_syn_materials" autoplay controls muted loop playsinline height="100%">
+            <source src="./videos/searsteakrawgif.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-nerf_llff_horns">
+          <video poster="" id="nerf_llff_horns" autoplay controls muted loop playsinline height="100%">
+            <source src="./videos/02flame264.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-img_pluto">
+          <video poster="" id="img_pluto" autoplay controls muted loop playsinline height="100%">
+            <source src="./videos/birthdaysmall.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-sdf_david">
+          <video poster="" id="sdf_david" autoplay controls muted loop playsinline height="100%">
+            <source src="./videos/searsteakmv.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+
+      </div>
+    </div>
+    <div  class="columns is-centered has-text-centered" style="text-align: center;">  
+       <p><br/>Active Reconstruction Progress in Replica and Matterport3D datasets. </small></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We present NARUTO, a neural active reconstruction system that combines a hybrid neural representation with uncertainty learning, enabling high-fidelity surface reconstruction. 
+            Our approach leverages a multi-resolution hash-grid as the mapping backbone, chosen for its exceptional convergence speed and capacity to capture high-frequency local features.
+          </p>
+          <p>
+            The centerpiece of our work is the incorporation of an uncertainty learning module that dynamically quantifies reconstruction uncertainty while actively reconstructing the environment. 
+            By harnessing learned uncertainty, we propose a novel uncertainty aggregation strategy for goal searching and efficient path planning. 
+            Our system autonomously explores by targeting uncertain observations and reconstructs environments with remarkable completeness and fidelity. 
+            We also demonstrate the utility of this uncertainty-aware approach by enhancing SOTA neural SLAM systems through an active ray sampling strategy.
+          </p>
+          <p>
+            Extensive evaluations of NARUTO in various environments, using an indoor scene simulator, confirm its superior performance and state-of-the-art status in active reconstruction, as evidenced by its impressive results on benchmark datasets like Replica and MP3D.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+    <!-- Paper video. -->
+    <br>
+
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe width="560" height="315" src="https://www.youtube.com/" title="YouTube video player" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div> -->
+
+    <!--/ Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <p>&nbsp;</p>
+          <h2 class="title is-3">NARUTO Demo. with NARUTO</h2>
+          <center>
+          <video poster="" id="img_shibuya" autoplay controls muted loop playsinline width="100%">
+            <source src="./videos/realtimedemo1cropscale.mp4"
+                    type="video/mp4">
+          </video>
+          </center>
+        </div>
+      </div>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <h2 class="title is-3">Method</h2>
+        <div class="content has-text-justified">
+          <center>
+            <img src="./static/images/method.png"  width="1000">
+          </center><br>
+          <p>
+            Upon reaching a keyframe step, HabitatSim generates posed RGB-D images.
+            A select number of pixels from these images are sampled and stored in the observation database.
+          </p>
+          <p>
+            Utilizing a mixed ray sampling strategy (combining Random and Active methods), a subset of rays is selected from the current keyframe and the database.
+            These rays are then processed through the Hybrid Scene Representation (Map) to deduce the corresponding color, Signed Distance Function (SDF), depth, and uncertainty values.
+          </p>
+          <p>
+            The predictions derived from this process facilitate uncertainty-aware bundle adjustment, updating both the scene's geometry and reconstruction uncertainty.
+          </p>
+          <p>
+            Subsequently, the Map is refreshed, and our novel uncertainty-aware planning algorithm is employed to determine a goal and trajectory based on the SDFs and uncertainties.
+            The agent then executes the planned action.
+          </p>
+          <br> 
+          <br> 
+        <center>
+          <img src="./static/images/method2.png"  width="1000">
+        </center>
+        <b>Uncertainty-based aggregation and Planning</b>: The top-k uncertain points are accumulated within the sensing range at each
+        potential goal location. The goal with the greatest level of uncertainty is subsequently selected as the provisional target location.
+        Efficient RRT planning effectively identifies a viable trajectory
+        from the agent’s current position to the designated goal.
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Results</h2>
+        <div class="content has-text-justified">
+          <h3 class="title is-4">Quantitative Results</h3>
+          <center>
+            <img src="./static/images/result.png"  width="800">
+          </center>
+              On Replica and Matterport3D datasets, our method achieves superior active reconstruction results.
+              Our ablation studies on Replica dataset show the effectiveness of our proposed componenets
+          <style>
+            .grid-container {
+              display: grid;
+              grid-template-columns: repeat(2, 1fr); /* Creates 2 columns with equal width */
+              grid-gap: 10px; /* Adjust the gap between the divs */
+            }
+            .grid-item {
+              width: 100%;
+            }
+          </style>
+
+          <br>
+
+          <h3 class="title is-4">Qualitative Results</h3>
+
+          (Optional) Change <b>Model Inspector</b> to <b>"Matcap"</b> for better geometry visualization.
+          
+
+          <!-- 3D Models -->
+          <div class="grid-container">
+            <div class="grid-item">
+              <div class="sketchfab-embed-wrapper"> <iframe title="Replica_office0" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share 
+                width="480" height="320" src="https://sketchfab.com/models/ba03a30caf804981b59252b1286e848d/embed?autospin=1&autostart=1"> </iframe> </div>
+            </div>
+            <div class="grid-item">
+              <div class="sketchfab-embed-wrapper"> <iframe title="Replica_room1" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share 
+                width="480" height="320" src="https://sketchfab.com/models/80548ee911474ef4b8771d8d4950d3ca/embed?autospin=1&autostart=1"> </iframe> </div>
+            </div>
+            <div class="grid-item">
+              <div>
+                <span style="display: inline; text-align: center; margin-left: 185px;"><b class="green-text">Replica-Office0</b>
+                </span>
+              </div>
+            </div>
+            <div class="grid-item">
+              <div>
+                <span style="display: inline; text-align: center; margin-left: 185px;"><b class="green-text">Replica-Room1</b>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-container">
+            <div class="grid-item">
+              <div class="sketchfab-embed-wrapper"> <iframe title="MP3D-PLe4" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share 
+                width="480" height="320" src="https://sketchfab.com/models/d68858e1f4804bc7b8682e27ad6048f4/embed?autospin=1&autostart=1"> </iframe> </div>
+            </div>
+            <div class="grid-item">
+              <div class="sketchfab-embed-wrapper"> <iframe title="MP3D-Gdvg" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share 
+                width="480" height="320" src="https://sketchfab.com/models/3d3cbd37c1674f47a9dacfdb0e193a59/embed?autospin=1&autostart=1"> </iframe> </div>
+            </div>
+            <div class="grid-item">
+              <div>
+                <span style="display: inline; text-align: center; margin-left: 190px;"><b class="green-text">MP3D-PLe4</b>
+                </span>
+              </div>
+            </div>
+              <div class="grid-item">
+                <span style="display: inline; text-align: center; margin-left: 190px;"><b class="green-text">MP3D-Gdvg</b>
+                </span>
+              </div>
+          </div>
+
+          <div class="grid-container">
+            <div class="grid-item">
+              <div class="sketchfab-embed-wrapper"> <iframe title="MP3D-Gz6f" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share 
+                width="480" height="320" src="https://sketchfab.com/models/6f32efd8e0124cc0a3fd752ee28d5972/embed?autospin=1&autostart=1"> </iframe> </div>
+            </div>
+            <div class="grid-item">
+              <div class="sketchfab-embed-wrapper"> <iframe title="MP3D-YmJk" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share 
+                width="480" height="320" src="https://sketchfab.com/models/d49e927907f744c4b74e2f18e9dd7692/embed?autospin=1&autostart=1"> </iframe> </div>
+            </div>
+            <div class="grid-item">
+              <div>
+                <span style="display: inline; text-align: center; margin-left: 190px;"><b class="green-text">MP3D-Gz6f</b>
+                </span>
+              </div>
+            </div>
+            <div class="grid-item">
+              <div>
+                <span style="display: inline; text-align: center; margin-left: 190px;"><b class="green-text">MP3D-YmJk</b>
+                </span>
+              </div>
+            </div>
+          </div>
+
+
+          
+
+
+          
+
+          <!--/ Paper video. -->
+
+          <div class="grid-container">
+            <div class="grid-item">
+              <div class="compare" style="width: 467px; margin-right: 20px; ">
+                <img class="slider-image" style="width: 467px" src="./static/images/replica/office0_gt.png" />
+                <img class="slider-image" style="width: 467px" src="./static/images/replica/office0_naruto.png" />
+              </div>
+            </div>
+            <div class="grid-item">
+              <div class="compare" style="width: 467px; ">
+                <img class="slider-image" style="width: 467px" src="./static/images/replica/room1_gt.png" />
+                <img class="slider-image" style="width: 467px" src="./static/images/replica/room1_naruto.png" />
+              </div>
+            </div>
+            <div class="grid-item">
+              <div>
+                <span style="display: inline; text-align: left; margin-right: 150px;"><b>GT</b></span>
+                <span style="display: inline; text-align: center; margin-right: 110px;"><b class="green-text">Replica-Office0</b>
+                </span>
+                <span style="display: inline; text-align: right;"><b>NARUTO</b></span>
+              </div>
+            </div>
+            <div class="grid-item">
+              <div>
+                <span style="display: inline; text-align: left; margin-right: 150px;"><b>GT</b></span>
+                <span style="display: inline; text-align: center; margin-right: 110px;"><b class="green-text">Replica-Room1</b>
+                </span>
+                <span style="display: inline; text-align: right;"><b>NARUTO</b></span>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="grid-container">
+            <div class="grid-item">
+              <div class="compare" style="width: 467px; margin-right: 20px; ">
+                <img class="slider-image" style="width: 467px" src="./static/images/mp3d/pLe4_whole_gt.png" />
+                <img class="slider-image" style="width: 467px" src="./static/images/mp3d/pLe4_whole_naruto.png" />
+              </div>
+            </div>
+            <div class="grid-item">
+              <div class="compare" style="width: 467px; ">
+                <img class="slider-image" style="width: 467px" src="./static/images/mp3d/pLe4_in_gt.png" />
+                <img class="slider-image" style="width: 467px" src="./static/images/mp3d/pLe4_in_naruto.png" />
+              </div>
+            </div>
+            <div class="grid-item">
+              <div>
+                <span style="display: inline; text-align: left; margin-right: 160px;"><b>GT</b></span>
+                <span style="display: inline; text-align: center; margin-right: 110px;"><b class="green-text">MP3D-pLe4</b>
+                </span>
+                <span style="display: inline; text-align: right;"><b>NARUTO</b></span>
+              </div>
+            </div>
+            <div class="grid-item">
+              <div>
+                <span style="display: inline; text-align: left; margin-right: 160px;"><b>GT</b></span>
+                <span style="display: inline; text-align: center; margin-right: 110px;"><b class="green-text">MP3D-pLe4</b>
+                </span>
+                <span style="display: inline; text-align: right;"><b>NARUTO</b></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-container">
+            <div class="grid-item">
+              <div class="compare" style="width: 467px; margin-right: 20px; ">
+                <img class="slider-image" style="width: 467px" src="./static/images/mp3d/Gdvg_whole_gt.png" />
+                <img class="slider-image" style="width: 467px" src="./static/images/mp3d/Gdvg_whole_naruto.png" />
+              </div>
+            </div>
+            <div class="grid-item">
+              <div class="compare" style="width: 467px; ">
+                <img class="slider-image" style="width: 467px" src="./static/images/mp3d/Gdvg_in_gt.png" />
+                <img class="slider-image" style="width: 467px" src="./static/images/mp3d/Gdvg_in_naruto.png" />
+              </div>
+            </div>
+            <div class="grid-item">
+              <div>
+                <span style="display: inline; text-align: left; margin-right: 160px;"><b>GT</b></span>
+                <span style="display: inline; text-align: center; margin-right: 110px;"><b class="green-text">MP3D-Gdvg</b>
+                </span>
+                <span style="display: inline; text-align: right;"><b>NARUTO</b></span>
+              </div>
+            </div>
+            <div class="grid-item">
+              <div>
+                <span style="display: inline; text-align: left; margin-right: 160px;"><b>GT</b></span>
+                <span style="display: inline; text-align: center; margin-right: 110px;"><b class="green-text">MP3D-Gdvg</b>
+                </span>
+                <span style="display: inline; text-align: right;"><b>NARUTO</b></span>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="grid-container">
+            <div class="grid-item">
+              <div class="compare" style="width: 467px; margin-right: 20px; ">
+                <img class="slider-image" style="width: 467px" src="./static/images/mp3d/Gz6f_whole_gt.png" />
+                <img class="slider-image" style="width: 467px" src="./static/images/mp3d/Gz6f_whole_naruto.png" />
+              </div>
+            </div>
+            <div class="grid-item">
+              <div class="compare" style="width: 467px; ">
+                <img class="slider-image" style="width: 467px" src="./static/images/mp3d/Gz6f_in_gt.png" />
+                <img class="slider-image" style="width: 467px" src="./static/images/mp3d/Gz6f_in_naruto.png" />
+              </div>
+            </div>
+            <div class="grid-item">
+              <div>
+                <span style="display: inline; text-align: left; margin-right: 160px;"><b>GT</b></span>
+                <span style="display: inline; text-align: center; margin-right: 110px;"><b class="green-text">MP3D-Gz6f</b>
+                </span>
+                <span style="display: inline; text-align: right;"><b>NARUTO</b></span>
+              </div>
+            </div>
+            <div class="grid-item">
+              <div>
+                <span style="display: inline; text-align: left; margin-right: 160px;"><b>GT</b></span>
+                <span style="display: inline; text-align: center; margin-right: 110px;"><b class="green-text">MP3D-Gz6f</b>
+                </span>
+                <span style="display: inline; text-align: right;"><b>NARUTO</b></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-container">
+            <div class="grid-item">
+              <div class="compare" style="width: 467px; margin-right: 20px; ">
+                <img class="slider-image" style="width: 467px" src="./static/images/mp3d/YmJk_whole_gt.png" />
+                <img class="slider-image" style="width: 467px" src="./static/images/mp3d/YmJk_whole_naruto.png" />
+              </div>
+            </div>
+            <div class="grid-item">
+              <div class="compare" style="width: 467px; ">
+                <img class="slider-image" style="width: 467px" src="./static/images/mp3d/YmJk_in_gt.png" />
+                <img class="slider-image" style="width: 467px" src="./static/images/mp3d/YmJk_in_naruto.png" />
+              </div>
+            </div>
+            <div class="grid-item">
+              <div>
+                <span style="display: inline; text-align: left; margin-right: 160px;"><b>GT</b></span>
+                <span style="display: inline; text-align: center; margin-right: 110px;"><b class="green-text">MP3D-YmJk</b>
+                </span>
+                <span style="display: inline; text-align: right;"><b>NARUTO</b></span>
+              </div>
+            </div>
+            <div class="grid-item">
+              <div>
+                <span style="display: inline; text-align: left; margin-right: 160px;"><b>GT</b></span>
+                <span style="display: inline; text-align: center; margin-right: 110px;"><b class="green-text">MP3D-YmJk</b>
+                </span>
+                <span style="display: inline; text-align: right;"><b>NARUTO</b></span>
+              </div>
+            </div>
+          </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title" style="text-align: center;">BibTeX</h2>
+    <pre><code>
+      @article{feng2024naruto,
+        title={NARUTO: Neural Active Reconstruction from Uncertain Target Observations},
+        author={Feng, Ziyue and Zhan, Huangying and Chen, Zheng and Yan, Qingan and Xu, Xiangyu and Cai, Changjiang and Li, Bing and Zhu, Qilun and Xu, Yi},
+        journal={arXiv preprint arXiv:2402.18771},
+        year={2024}
+      }
+</code></pre>
+<p>&nbsp;</p>
+</div>
+<!-- <div class="container is-max-desktop content">
+  <h2 class="title" style="text-align: center;">References</h2>
+  [1] Michael Broxton, John Flynn, Ryan Overbeck, Daniel Erickson, Peter Hedman, Matthew DuVall, Jason Dourgarian, Jay Busch, Matt Whalen, and Paul Debevec. <em>Immersive Light Field Video with a Layered Mesh Representation</em>. ACM Transactions on Graphics, 2020.<br/>
+  [2] Neus Sabater, Guillaume Boisson, Benoit Vandame, Paul Kerbiriou, Frederic Babon, Matthieu Hog, Remy Gendrot, Tristan Langlois, Olivier Bureller, Arno Schubert, et al. <em>Dataset and pipeline for multi-view light-field video</em>. In Proceedings of the IEEE conference on computer vision and pattern recognition Workshops, 2017.<br>
+  [3] Tianye Li, Mira Slavcheva, Michael Zollhoefer, Simon Green, Christoph Lassner, Changil Kim, Tanner Schmidt, Steven Lovegrove, Michael Goesele, Richard Newcombe, et al. <em>Neural 3d video synthesis from multi-view video</em>. In
+  Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, 2022.<br/>
+  [4] Bernhard Kerbl, Georgios Kopanas, Thomas Leimkühler, and George Drettakis. <em>3d gaussian splatting for real-time radiance field rendering</em>. ACM Transactions on Graphics
+  (TOG), 2023. <br/>
+  [5] Jonathon Luiten, Georgios Kopanas, Bastian Leibe, and Deva Ramanan. <em>Dynamic 3d gaussians: Tracking by persistent dynamic view synthesis</em>. In 3DV, 2024. <br/>
+  [6] Sara Fridovich-Keil, Giacomo Meanti, Frederik Rahbæk Warburg, Benjamin Recht, and Angjoo Kanazawa. <em>K-planes: Explicit radiance fields in space, time, and appearance</em>. In
+  Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, 2023. <br/>
+  [7] Ang Cao and Justin Johnson. <em>Hexplane: A fast representation for dynamic scenes</em>. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, 2023. <br/>
+  [8] Feng Wang, Sinan Tan, Xinghang Li, Zeyue Tian, Yafei Song, and Huaping Liu. <em>Mixed neural voxels for fast multiview video synthesis</em>. In Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV), 2023. <br/>
+  [9] Benjamin Attal, Jia-Bin Huang, Christian Richardt, Michael Zollhoefer, Johannes Kopf, Matthew O’Toole, and Changil Kim. <em>HyperReel: High-fidelity 6-DoF video with rayconditioned sampling</em>. In Conference on Computer Vision and Pattern Recognition (CVPR), 2023. <br/>
+  [10] Liangchen Song, Anpei Chen, Zhong Li, Zhang Chen, Lele
+  Chen, Junsong Yuan, Yi Xu, and Andreas Geiger. <em>Nerfplayer: A streamable dynamic scene representation with decomposed neural radiance fields</em>. IEEE Transactions on Visualization and Computer Graphics, 2023. <br/>
+</div> -->
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/oppo-us-research/SpacetimeGaussians" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This great website template was borrowed from <a
+              href="https://github.com/nerfies/nerfies.github.io">nerfies</a>, <a
+              href="https://github.com/defocus-control/defocus-control.github.io">DC<sup>2</sup></a> and <a
+              href="https://github.com/oppo-us-research/NeuRBF-website">NeuRBF</a> !
+          </p>
+          <!-- <p>
+            The visualiation of the Spacetime Gaussians is inspired from visualization of 3D Gaussians from <a
+              href="https://lumalabs.ai/">Luma AI</a>.
+          </p> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
